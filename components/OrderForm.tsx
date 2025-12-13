@@ -204,7 +204,7 @@ export const OrderForm: React.FC = () => {
                 ) : (
                   <>
                     <span>অর্ডার কনফার্ম করুন {total} BDT</span>
-                    <span className="text-2xl">→</span>
+                    <span className="text-2xl pr-2 sm:pr-0">→</span>
                   </>
                 )}
               </button>
