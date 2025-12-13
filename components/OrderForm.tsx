@@ -42,7 +42,7 @@ export const OrderForm: React.FC = () => {
     };
 
     try {
-      const res = await fetch("https://smart-trimmer-backend.onrender.com/create-order", {
+      const res = await fetch("https://smart-trimmer-backend.vercel.app/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData),
