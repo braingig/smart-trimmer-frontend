@@ -20,7 +20,7 @@ export const MarketingSlider: React.FC = () => {
     },
     {
       id: 3,
-      image: "https://images.unsplash.com/photo-1635694767425-c61bb6a9aee1?q=80&w=800&auto=format&fit=crop",
+      image: "/images/ms-3.jpeg",
       title: "অস্থির পারফরম্যান্স পাবেন!",
       description: "২ বছরের গ্যারান্টি দিচ্ছি আমরা। সমস্যা হলে নতুন পাঠাবো।",
       buttonText: "অর্ডার করুন"

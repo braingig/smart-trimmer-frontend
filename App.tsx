@@ -8,7 +8,7 @@ import { VideoSection } from './components/VideoSection';
 import { ProductShowcase } from './components/ProductShowcase';
 import { ComparisonTable } from './components/ComparisonTable';
 import { OrderForm } from './components/OrderForm';
-import { ChatAssistant } from './components/ChatAssistant';
+// import { ChatAssistant } from './components/ChatAssistant';
 import { FAQ } from './components/FAQ';
 import { MarketingSlider } from './components/MarketingSlider';
 
@@ -40,7 +40,7 @@ const App: React.FC = () => {
         </div>
       </footer>
 
-      <ChatAssistant />
+      {/* <ChatAssistant /> */}
     </div>
   );
 };
