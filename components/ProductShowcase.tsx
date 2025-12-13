@@ -17,19 +17,19 @@ export const ProductShowcase: React.FC = () => {
             </div>
             <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all group">
                 <div className="overflow-hidden rounded-xl mb-3">
-                   <img src="/images/package-2.jpeg" className="w-full h-auto aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="Cable" />
+                   <img src="/images/3.png" className="w-full h-auto aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="Cable" />
                 </div>
                 <p className="text-center font-bold text-slate-700 font-hind group-hover:text-amber-600 transition-colors">Type-C চার্জিং ক্যাবল</p>
             </div>
             <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all group">
                 <div className="overflow-hidden rounded-xl mb-3">
-                   <img src="/images/package-3.jpeg" className="w-full h-auto aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="Clips" />
+                   <img src="/images/2.png" className="w-full h-auto aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="Clips" />
                 </div>
                 <p className="text-center font-bold text-slate-700 font-hind group-hover:text-amber-600 transition-colors">৪টি সাইজ ক্লিপ</p>
             </div>
             <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all group">
                 <div className="overflow-hidden rounded-xl mb-3">
-                   <img src="/images/package-4.jpeg" className="w-full h-auto aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="Cleaning Kit" />
+                   <img src="/images/4.png" className="w-full h-auto aspect-square object-cover group-hover:scale-110 transition-transform duration-500" alt="Cleaning Kit" />
                 </div>
                 <p className="text-center font-bold text-slate-700 font-hind group-hover:text-amber-600 transition-colors">পরিষ্কার করার ব্রাশ ও তেল</p>
             </div>
