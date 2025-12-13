@@ -6,14 +6,14 @@ export const MarketingSlider: React.FC = () => {
   const slides = [
     {
       id: 1,
-      image: "https://images.unsplash.com/photo-1621609764095-b32bbe35cf3a?q=80&w=800&auto=format&fit=crop",
+      image: "/images/vintage-t9.jpeg",
       title: "ব্যাপক শক্তিশালী",
       description: "চুল দাড়ি সাইজ করার জন্য বেস্ট!",
       buttonText: "অর্ডার করুন"
     },
     {
       id: 2,
-      image: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=80&w=800&auto=format&fit=crop",
+      image: "/images/ms-2.jpeg",
       title: "ইতালিতে জনপ্রিয়তা তুঙ্গে",
       description: "ইতালি ইন্ডিয়া সহ বিশ্বের বিভিন্ন দেশে এইটা ব্যাপক জনপ্রিয়",
       buttonText: "অর্ডার করুন"
