@@ -48,7 +48,7 @@ export const Hero: React.FC = () => {
           
           <div className="relative z-10">
             <img 
-              src="/images/vintage-t9.jpeg" 
+              src="/images/1.png" 
               alt="Vintage T9 Trimmer" 
               className="w-full h-auto rounded-2xl shadow-2xl border-4 border-slate-700/50"
             />
