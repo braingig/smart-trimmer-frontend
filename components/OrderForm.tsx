@@ -19,19 +19,47 @@ export const OrderForm: React.FC = () => {
   const subtotal = productPrice * orderDetails.quantity;
   const total = subtotal + deliveryCharge;
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+
+  //   // Simulating API call
+  //   setTimeout(() => {
+  //       setIsLoading(false);
+  //       setIsSubmitted(true);
+  //       window.scrollTo({ top: 0, behavior: "smooth" });
+  //       console.log("Order submitted:", { ...orderDetails, deliveryZone, total });
+  //   }, 1500);
+  // };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
 
-    // Simulating API call
-    setTimeout(() => {
-        setIsLoading(false);
+    const orderData = {
+      fullName: orderDetails.fullName,
+      phoneNumber: orderDetails.phoneNumber,
+      address: orderDetails.address,
+      quantity: orderDetails.quantity,
+    };
+
+    try {
+      const res = await fetch("https://smart-trimmer-backend.onrender.com/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData),
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
         setIsSubmitted(true);
         window.scrollTo({ top: 0, behavior: "smooth" });
-        console.log("Order submitted:", { ...orderDetails, deliveryZone, total });
-    }, 1500);
+      } else {
+        alert("Order failed! Check backend logs.");
+      }
+    } catch (error) {
+      alert("Backend connection failed.");
+    }
   };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setOrderDetails(prev => ({ ...prev, [name]: value }));
@@ -41,11 +69,11 @@ export const OrderForm: React.FC = () => {
     return (
       <div className="fixed inset-0 z-[100] bg-slate-50 overflow-y-auto flex items-center justify-center p-4 animate-in fade-in duration-300 font-hind">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 text-center border-t-8 border-green-500 relative">
-          
+
           <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="text-green-600" size={48} />
           </div>
-          
+
           <h2 className="text-3xl font-bold text-slate-800 mb-2">অর্ডার কনফার্ম হয়েছে!</h2>
           <p className="text-slate-600 mb-8 text-lg">
             ধন্যবাদ <strong>{orderDetails.fullName}</strong>! আমাদের প্রতিনিধি শীঘ্রই আপনার সাথে যোগাযোগ করে অর্ডারটি নিশ্চিত করবেন।
@@ -53,19 +81,19 @@ export const OrderForm: React.FC = () => {
 
           {/* Order Summary */}
           <div className="bg-slate-50 rounded-xl p-6 mb-8 text-left space-y-3 border border-slate-100">
-             <h3 className="font-bold text-slate-700 border-b border-slate-200 pb-2 mb-2">অর্ডার সামারি</h3>
-             <div className="flex justify-between text-sm">
-                <span className="text-slate-500">পণ্য:</span>
-                <span className="font-medium">Vintage T9 Trimmer x {orderDetails.quantity}</span>
-             </div>
-             <div className="flex justify-between text-sm">
-                <span className="text-slate-500">ডেলিভারি চার্জ:</span>
-                <span className="font-medium">{deliveryCharge} টাকা ({deliveryZone === DeliveryZone.INSIDE_DHAKA ? 'ঢাকার ভেতরে' : 'ঢাকার বাইরে'})</span>
-             </div>
-             <div className="flex justify-between text-lg font-bold text-slate-800 pt-2 border-t border-slate-200 mt-2">
-                <span>সর্বমোট বিল:</span>
-                <span className="text-green-600">{total} টাকা</span>
-             </div>
+            <h3 className="font-bold text-slate-700 border-b border-slate-200 pb-2 mb-2">অর্ডার সামারি</h3>
+            <div className="flex justify-between text-sm">
+              <span className="text-slate-500">পণ্য:</span>
+              <span className="font-medium">Vintage T9 Trimmer x {orderDetails.quantity}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-slate-500">ডেলিভারি চার্জ:</span>
+              <span className="font-medium">{deliveryCharge} টাকা ({deliveryZone === DeliveryZone.INSIDE_DHAKA ? 'ঢাকার ভেতরে' : 'ঢাকার বাইরে'})</span>
+            </div>
+            <div className="flex justify-between text-lg font-bold text-slate-800 pt-2 border-t border-slate-200 mt-2">
+              <span>সর্বমোট বিল:</span>
+              <span className="text-green-600">{total} টাকা</span>
+            </div>
           </div>
 
           <button
@@ -87,21 +115,21 @@ export const OrderForm: React.FC = () => {
 
   return (
     <div id="order-section" className="py-16 bg-[#FFFBEB] font-hind">
-      
+
       {/* 1. Main Form Section (Narrow Width) */}
       <div className="max-w-2xl mx-auto px-4 mb-16 relative z-10">
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-orange-100">
-          
+
           {/* Header Section - Dark Orange/Brown */}
           <div className="bg-[#C2410C] text-white p-8 text-center relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
             <h2 className="text-xl md:text-2xl font-bold mb-3 relative z-10">অর্ডার কনফার্ম করতে নিচের ফর্মটি পূরণ করুন</h2>
             <div className="flex justify-center items-center gap-4 mb-4 relative z-10">
-               <span className="text-orange-200 text-xl line-through decoration-2">৯৭০ টাকা</span>
-               <span className="text-3xl md:text-4xl font-bold text-white">{productPrice} টাকা</span>
+              <span className="text-orange-200 text-xl line-through decoration-2">৯৭০ টাকা</span>
+              <span className="text-3xl md:text-4xl font-bold text-white">{productPrice} টাকা</span>
             </div>
             <div className="inline-block bg-[#EA580C] px-6 py-2 rounded-full text-sm md:text-base font-bold shadow-lg border border-orange-400 relative z-10 animate-pulse">
-                🎉 আজকের জন্য ৩৫% ছাড়!
+              🎉 আজকের জন্য ৩৫% ছাড়!
             </div>
           </div>
 
@@ -128,7 +156,7 @@ export const OrderForm: React.FC = () => {
               {/* Mobile */}
               <div>
                 <label className="block text-lg font-bold text-slate-700 mb-2 flex items-center gap-2">
-                   <Phone size={20} className="text-orange-600" /> মোবাইল নাম্বার <span className="text-red-500">*</span>
+                  <Phone size={20} className="text-orange-600" /> মোবাইল নাম্বার <span className="text-red-500">*</span>
                 </label>
                 <input
                   required
@@ -144,7 +172,7 @@ export const OrderForm: React.FC = () => {
               {/* Address */}
               <div>
                 <label className="block text-lg font-bold text-slate-700 mb-2 flex items-center gap-2">
-                   <MapPin size={20} className="text-orange-600" /> আপনার ঠিকানা <span className="text-red-500">*</span>
+                  <MapPin size={20} className="text-orange-600" /> আপনার ঠিকানা <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   required
@@ -159,10 +187,10 @@ export const OrderForm: React.FC = () => {
               {/* Delivery Options */}
               <div className="pt-2">
                 <label className="block text-lg font-bold text-slate-700 mb-3 flex items-center gap-2">
-                   <Truck size={20} className="text-orange-600" /> ডেলিভারি অপশন <span className="text-red-500">*</span>
+                  <Truck size={20} className="text-orange-600" /> ডেলিভারি অপশন <span className="text-red-500">*</span>
                 </label>
                 <div className="space-y-3">
-                  <div 
+                  <div
                     onClick={() => setDeliveryZone(DeliveryZone.INSIDE_DHAKA)}
                     className={`cursor-pointer border-2 rounded-xl p-4 flex items-center justify-between transition-all ${deliveryZone === DeliveryZone.INSIDE_DHAKA ? 'border-green-500 bg-green-50 ring-1 ring-green-500' : 'border-slate-100 hover:border-slate-300 bg-white'}`}
                   >
@@ -175,13 +203,13 @@ export const OrderForm: React.FC = () => {
                     <span className="font-bold text-slate-800">৪০ টাকা</span>
                   </div>
 
-                  <div 
+                  <div
                     onClick={() => setDeliveryZone(DeliveryZone.OUTSIDE_DHAKA)}
                     className={`cursor-pointer border-2 rounded-xl p-4 flex items-center justify-between transition-all ${deliveryZone === DeliveryZone.OUTSIDE_DHAKA ? 'border-green-500 bg-green-50 ring-1 ring-green-500' : 'border-slate-100 hover:border-slate-300 bg-white'}`}
                   >
                     <div className="flex items-center gap-3">
                       <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${deliveryZone === DeliveryZone.OUTSIDE_DHAKA ? 'border-green-600' : 'border-slate-400'}`}>
-                         {deliveryZone === DeliveryZone.OUTSIDE_DHAKA && <div className="w-3 h-3 bg-green-600 rounded-full"></div>}
+                        {deliveryZone === DeliveryZone.OUTSIDE_DHAKA && <div className="w-3 h-3 bg-green-600 rounded-full"></div>}
                       </div>
                       <span className="font-bold text-slate-700">ঢাকার বাইরে হোম ডেলিভারি</span>
                     </div>
@@ -208,11 +236,11 @@ export const OrderForm: React.FC = () => {
                   </>
                 )}
               </button>
-              
+
               <div className="text-center">
-                 <p className="text-xs text-slate-400 flex items-center justify-center gap-1">
-                    <Lock size={12} /> আপনার তথ্য ১০০% নিরাপদ। পেমেন্ট ক্যাশ অন ডেলিভারি।
-                 </p>
+                <p className="text-xs text-slate-400 flex items-center justify-center gap-1">
+                  <Lock size={12} /> আপনার তথ্য ১০০% নিরাপদ। পেমেন্ট ক্যাশ অন ডেলিভারি।
+                </p>
               </div>
 
             </form>
@@ -223,37 +251,37 @@ export const OrderForm: React.FC = () => {
       {/* 2. Trust Badges Section (Wide Width - Aligned with other sections) */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-md transition-shadow">
-                <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 text-green-600">
-                    <HandCoins size={28} />
-                </div>
-                <h3 className="font-bold text-slate-800 mb-1">ক্যাশ অন ডেলিভারি</h3>
-                <p className="text-xs text-slate-500">পণ্য হাতে পেয়ে টাকা পরিশোধ করুন</p>
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-md transition-shadow">
+            <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 text-green-600">
+              <HandCoins size={28} />
             </div>
+            <h3 className="font-bold text-slate-800 mb-1">ক্যাশ অন ডেলিভারি</h3>
+            <p className="text-xs text-slate-500">পণ্য হাতে পেয়ে টাকা পরিশোধ করুন</p>
+          </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-md transition-shadow">
-                <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 text-blue-600">
-                    <Truck size={28} />
-                </div>
-                <h3 className="font-bold text-slate-800 mb-1">দ্রুত ডেলিভারি</h3>
-                <p className="text-xs text-slate-500">সারা বাংলাদেশে ২-৪ দিনে ডেলিভারি</p>
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-md transition-shadow">
+            <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 text-blue-600">
+              <Truck size={28} />
             </div>
+            <h3 className="font-bold text-slate-800 mb-1">দ্রুত ডেলিভারি</h3>
+            <p className="text-xs text-slate-500">সারা বাংলাদেশে ২-৪ দিনে ডেলিভারি</p>
+          </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-md transition-shadow">
-                <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3 text-red-600">
-                    <RotateCcw size={28} />
-                </div>
-                <h3 className="font-bold text-slate-800 mb-1">রিটার্ন পলিসি</h3>
-                <p className="text-xs text-slate-500">পণ্যে সমস্যা থাকলে ৭ দিনের মধ্যে রিটার্ন</p>
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-md transition-shadow">
+            <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3 text-red-600">
+              <RotateCcw size={28} />
             </div>
+            <h3 className="font-bold text-slate-800 mb-1">রিটার্ন পলিসি</h3>
+            <p className="text-xs text-slate-500">পণ্যে সমস্যা থাকলে ৭ দিনের মধ্যে রিটার্ন</p>
+          </div>
 
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-md transition-shadow">
-                <div className="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3 text-orange-600">
-                    <ShieldCheck size={28} />
-                </div>
-                <h3 className="font-bold text-slate-800 mb-1">২ বছর গ্যারান্টি</h3>
-                <p className="text-xs text-slate-500">১০০% অরিজিনাল প্রোডাক্ট গ্যারান্টি</p>
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-md transition-shadow">
+            <div className="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3 text-orange-600">
+              <ShieldCheck size={28} />
             </div>
+            <h3 className="font-bold text-slate-800 mb-1">২ বছর গ্যারান্টি</h3>
+            <p className="text-xs text-slate-500">১০০% অরিজিনাল প্রোডাক্ট গ্যারান্টি</p>
+          </div>
         </div>
       </div>
 
