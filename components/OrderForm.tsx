@@ -37,7 +37,7 @@ export const OrderForm: React.FC = () => {
     e.preventDefault();
     const charCount = orderDetails.address.trim().length;
 
-    if (charCount < 12) {
+    if (charCount < 10) {
       setToast("বাড়ি, রাস্তা, এলাকা ও জেলা সহ বিস্তারিত ঠিকানা লিখুন");
       setTimeout(() => setToast(null), 3000);
       return;
