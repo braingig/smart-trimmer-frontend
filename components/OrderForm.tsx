@@ -35,14 +35,13 @@ export const OrderForm: React.FC = () => {
   // };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const wordCount = orderDetails.address.trim().split(/\s+/).filter(Boolean).length;
+    const charCount = orderDetails.address.trim().length;
 
-    if (wordCount < 10) {
+    if (charCount < 12) {
       setToast("বাড়ি, রাস্তা, এলাকা ও জেলা সহ বিস্তারিত ঠিকানা লিখুন");
       setTimeout(() => setToast(null), 3000);
       return;
     }
-
 
     const orderData = {
       fullName: orderDetails.fullName,
