@@ -12,6 +12,8 @@ export const OrderForm: React.FC = () => {
   const [deliveryZone, setDeliveryZone] = useState<DeliveryZone>(DeliveryZone.INSIDE_DHAKA);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+
 
   // Pricing Logic
   const productPrice = 630;
@@ -33,6 +35,14 @@ export const OrderForm: React.FC = () => {
   // };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const wordCount = orderDetails.address.trim().split(/\s+/).filter(Boolean).length;
+
+    if (wordCount < 10) {
+      setToast("বাড়ি, রাস্তা, এলাকা ও জেলা সহ বিস্তারিত ঠিকানা লিখুন");
+      setTimeout(() => setToast(null), 3000);
+      return;
+    }
+
 
     const orderData = {
       fullName: orderDetails.fullName,
@@ -115,6 +125,24 @@ export const OrderForm: React.FC = () => {
 
   return (
     <div id="order-section" className="py-16 bg-[#FFFBEB] font-hind">
+      {/* Toaster */}
+      {toast && (
+        <div className="fixed top-0 right-0 z-[200] w-[320px] bg-amber-50 border-l-4 border-amber-500 p-5 shadow-sm animate-in fade-in slide-in-from-top-3">
+          <div className="flex gap-3">
+            <span className="text-xl leading-none">⚠️</span>
+
+            <div>
+              <p className="text-amber-900 font-bold font-hind text-sm mb-1">
+                ঠিকানা অসম্পূর্ণ
+              </p>
+              <p className="text-amber-900 font-medium font-hind text-sm leading-relaxed">
+                {toast}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Toaster */}
 
       {/* 1. Main Form Section (Narrow Width) */}
       <div className="max-w-2xl mx-auto px-4 mb-16 relative z-10">
