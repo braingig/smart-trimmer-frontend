@@ -30,7 +30,7 @@ export const MarketingSlider: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % slides.length);
-    }, 2000);
+    }, 3200);
     return () => clearInterval(interval);
   }, [slides.length]);
 
@@ -80,7 +80,7 @@ export const MarketingSlider: React.FC = () => {
             {slides.map((slide, index) => (
               <div 
                 key={slide.id}
-                className={`transition-all duration-500 absolute w-full left-0 ${index === currentIndex ? 'opacity-100 translate-y-0 z-10' : 'opacity-0 translate-y-4 z-0 pointer-events-none'}`}
+                className={`transition-all duration-500 absolute w-full left-0 flex flex-col items-center md:items-start text-center md:text-left ${index === currentIndex ? 'opacity-100 translate-y-0 z-10' : 'opacity-0 translate-y-4 z-0 pointer-events-none'}`}
               >
                 <h2 className="text-3xl md:text-5xl font-bold text-slate-800 leading-tight mb-4 drop-shadow-sm">
                   {slide.title}
