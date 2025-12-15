@@ -36,8 +36,8 @@ export const ProductShowcase: React.FC = () => {
         </div>
 
         <div className="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-xl shadow-sm">
-          <p className="text-amber-900 font-medium font-hind text-lg flex items-center gap-2">
-            ⚠️ <span className="font-bold">বিঃদ্রঃ</span> বাজারের কম দামি কপি ট্রিমার কিনে প্রতারিত হবেন না। আমরা দিচ্ছি ১০০% অরিজিনাল পন্যের গ্যারান্টি।
+          <p className="text-amber-900 font-medium font-hind text-lg flex items-center gap-2 overflow-visible">
+            ⚠️ <span className="font-bold">বিঃদ্রঃ</span> বাজারের কম দামি কপি ট্রিমার কিনে প্রতারিত হবেন না। আমরা দিচ্ছি 100% অরিজিনাল পন্যের গ্যারান্টি।
           </p>
         </div>
       </div>

@@ -43,7 +43,7 @@ export const VideoSection: React.FC = () => {
               <ShoppingCart size={24} />
               এখনই অর্ডার করুন
             </button>
-            <p className="text-slate-500 text-sm font-hind mt-4">
+            <p className="text-slate-500 text-sm font-hind mt-4 text-center">
               ভিডিওটিতে ট্রিমারটির আনবক্সিং এবং ব্যবহারের নিয়ম দেখানো হয়েছে।
             </p>
           </div>
